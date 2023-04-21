@@ -31,11 +31,8 @@ while True:
                 if num > max_num:
                     max_num = num
                     top_count_row = count_row
-                print(top_count_row)
-                print(max_num)
-            print(top_count_row)
 
-            recommend_restaurant = ""
+            recommend_restaurant = top_count_row["restaurant_name"]
             # Question(Y/N)
             print(colored(f"{surrounding}\n私のおすすめのレストランは、{recommend_restaurant}です。", "light_green"))
             restaurant_answer = input(colored(f"このレストランは好きですか？[Yes/No]\n{surrounding}\n", "light_green"))
