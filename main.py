@@ -23,14 +23,26 @@ while True:
     # ファイル有無確認
     if os.path.exists('restaurant_count.csv'):
         
-        recommend_restaurant = ""
-        # Question(Y/N)
-        print(colored(f"{surrounding}\n私のおすすめのレストランは、{recommend_restaurant}です。", "light_green"))
-        restaurant_answer = input(colored(f"このレストランは好きですか？[Yes/No]\n{surrounding}\n", "light_green"))
-
         with open('restaurant_count.csv', 'r') as r_csvfile:
             reader = csv.DictReader(r_csvfile)
             data = list(reader)
+            
+            max_num = 0
+            for count_row in data:
+                num = count_row["count"]
+                num = int(num)
+                if num > max_num:
+                    max_num = num
+                    top_count_row = count_row
+                print(top_count_row)
+                print(max_num)
+            print(top_count_row)
+
+            recommend_restaurant = ""
+            # Question(Y/N)
+            print(colored(f"{surrounding}\n私のおすすめのレストランは、{recommend_restaurant}です。", "light_green"))
+            restaurant_answer = input(colored(f"このレストランは好きですか？[Yes/No]\n{surrounding}\n", "light_green"))
+
             a = False
             for row in data:
                 # count編集
