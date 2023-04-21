@@ -12,13 +12,10 @@ while True:
     name = name.title()
     
     # Second_Question
-    def get_favorite_restaurant():
-        while bool(name.strip()):
-            favorite_restaurant = input(colored(f"{surrounding}\n{name}さん、どこのレストランが好きですか？\n{surrounding}\n", "light_green"))
+    if bool(name.strip()):
+        favorite_restaurant = input(colored(f"{surrounding}\n{name}さん、どこのレストランが好きですか？\n{surrounding}\n", "light_green"))
+        if bool(favorite_restaurant.strip()):
             favorite_restaurant = favorite_restaurant.title()
-            if bool(favorite_restaurant.strip()):    
-                return favorite_restaurant
-    favorite_restaurant = get_favorite_restaurant()
 
     # ファイル有無確認
     if os.path.exists('restaurant_count.csv'):
