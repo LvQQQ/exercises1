@@ -11,11 +11,12 @@ while True:
     name = input(colored(f"{surrounding}\nこんにちは!私の名前はROBOです。あなたの名前は？\n{surrounding}\n", "light_green"))
     name = name.title()
     
-    # Second_Question
-    if bool(name.strip()):
-        favorite_restaurant = input(colored(f"{surrounding}\n{name}さん、どこのレストランが好きですか？\n{surrounding}\n", "light_green"))
-        if bool(favorite_restaurant.strip()):
-            favorite_restaurant = favorite_restaurant.title()
+    if not os.path.exists('restaurant_count.csv'):
+        # Second_Question
+        if bool(name.strip()):
+            favorite_restaurant = input(colored(f"{surrounding}\n{name}さん、どこのレストランが好きですか？\n{surrounding}\n", "light_green"))
+            if bool(favorite_restaurant.strip()):
+                favorite_restaurant = favorite_restaurant.title()
 
     # ファイル有無確認
     if os.path.exists('restaurant_count.csv'):
@@ -24,6 +25,7 @@ while True:
             reader = csv.DictReader(r_csvfile)
             data = list(reader)
             
+            # おすすめレストラン
             max_num = 0
             for count_row in data:
                 num = count_row["count"]
@@ -35,7 +37,19 @@ while True:
             recommend_restaurant = top_count_row["restaurant_name"]
             # Question(Y/N)
             print(colored(f"{surrounding}\n私のおすすめのレストランは、{recommend_restaurant}です。", "light_green"))
-            restaurant_answer = input(colored(f"このレストランは好きですか？[Yes/No]\n{surrounding}\n", "light_green"))
+            restaurant_answer = input(colored(f"このレストランは好きですか？[Yes/No]\n{surrounding}\n", "light_green")).upper()
+            while True:
+                if restaurant_answer == "YES" or "Y":
+                    break
+                elif restaurant_answer == "NO" or "n":
+                    print(restaurant_answer)
+
+
+            # Second_Question
+            if bool(name.strip()):
+                favorite_restaurant = input(colored(f"{surrounding}\n{name}さん、どこのレストランが好きですか？\n{surrounding}\n", "light_green"))
+                if bool(favorite_restaurant.strip()):
+                    favorite_restaurant = favorite_restaurant.title()
 
             a = False
             for row in data:
